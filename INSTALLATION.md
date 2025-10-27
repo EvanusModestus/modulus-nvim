@@ -103,7 +103,7 @@ This guide will walk you through installing Modulus-nvim on any platform.
 
 2. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/modulus-nvim.git ~/.config/nvim
+   git clone https://github.com/EvanusModestus/modulus-nvim.git ~/.config/nvim
    ```
 
 3. **Launch Neovim**
@@ -129,7 +129,7 @@ This guide will walk you through installing Modulus-nvim on any platform.
 
 2. **Clone the repository directly to the Neovim config location**
    ```powershell
-   git clone https://github.com/yourusername/modulus-nvim.git $env:LOCALAPPDATA\nvim
+   git clone https://github.com/EvanusModestus/modulus-nvim.git $env:LOCALAPPDATA\nvim
    ```
 
 3. **Launch Neovim**
@@ -148,7 +148,7 @@ This method allows you to keep the config in a custom location while Neovim read
 1. **Clone to a custom location**
    ```powershell
    cd C:\Users\$env:USERNAME
-   git clone https://github.com/yourusername/modulus-nvim.git modulus-nvim
+   git clone https://github.com/EvanusModestus/modulus-nvim.git modulus-nvim
    ```
 
 2. **Create a junction (not a symlink)**
@@ -176,7 +176,7 @@ Follow the same steps as [Linux/macOS](#linuxmacos):
 mv ~/.config/nvim ~/.config/nvim.backup
 
 # 2. Clone repository
-git clone https://github.com/yourusername/modulus-nvim.git ~/.config/nvim
+git clone https://github.com/EvanusModestus/modulus-nvim.git ~/.config/nvim
 
 # 3. Launch Neovim
 nvim

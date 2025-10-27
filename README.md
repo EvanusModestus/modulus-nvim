@@ -34,7 +34,7 @@ Modulus is a comprehensive, production-ready Neovim configuration designed with 
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/modulus-nvim.git ~/.config/nvim
+git clone https://github.com/EvanusModestus/modulus-nvim.git ~/.config/nvim
 
 # Launch Neovim (plugins will auto-install)
 nvim
