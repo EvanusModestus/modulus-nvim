@@ -1,0 +1,67 @@
+# Lazy plugin manager lock file (optional - uncomment to ignore)
+# lazy-lock.json
+
+# Plugin compiled files (but not after/plugin)
+/plugin/
+
+# Temporary files
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Session files
+Session.vim
+*.session
+
+# Tags
+tags
+.tags
+
+# Log files
+*.log
+
+# Backup files
+*.bak
+*.orig_bak
+*.backup
+*.new_v*
+
+# Private notes and session files
+CLAUDE_SESSION_NOTES.md
+*SESSION_NOTES*
+*.notes
+
+# Temporary test files
+/tmp/
+*.txt.backup
+
+# Claude Code cache, logs, and settings (machine-specific)
+.claude/cache/
+.claude/logs/
+.claude/*.log
+.claude/sessions/
+.claude/settings.local.json
+
+# Personal/private directories (not for public repo)
+/04_COMPREHENSIVE_TEST_SUITE/
+/03_TEST_LAB/
+/02_TRAINING/
+/LEARNING_PROJECTS/
+/99_ARCHIVE/
+
+# Oil.nvim file manager state
+oil:/
+
+# LSP and language server files
+.null-ls_*
+.luarc.json
+
+# Operating system files
+Thumbs.db
+Desktop.ini
+
+# IDE files
+.vscode/
+.idea/
+*.iml
