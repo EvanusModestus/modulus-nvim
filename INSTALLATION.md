@@ -16,76 +16,124 @@ This guide will walk you through installing Modulus-nvim on any platform.
 
 ## Prerequisites
 
-### Required Software
+### Installing All Dependencies
 
-1. **Neovim 0.9.0 or higher**
-   ```bash
-   # Check your version
-   nvim --version
-   ```
+#### Ubuntu/Debian
 
-2. **Git**
-   ```bash
-   # Check if installed
-   git --version
-   ```
+```bash
+# Install all required dependencies
+sudo apt update && sudo apt install -y \
+  neovim \
+  git \
+  build-essential \
+  ripgrep \
+  fd-find \
+  nodejs \
+  npm \
+  curl \
+  unzip \
+  tar \
+  gzip \
+  python3 \
+  python3-pip \
+  python3-venv \
+  wget
 
-3. **A Nerd Font** (for icons)
-   - Download from [Nerd Fonts](https://www.nerdfonts.com/)
-   - Recommended: JetBrainsMono Nerd Font, FiraCode Nerd Font, or Hack Nerd Font
-   - Install the font and configure your terminal to use it
+# Install glow (markdown viewer)
+wget https://github.com/charmbracelet/glow/releases/download/v1.5.1/glow_1.5.1_linux_amd64.tar.gz
+tar -xzf glow_1.5.1_linux_amd64.tar.gz
+sudo mv glow /usr/local/bin/
+rm glow_1.5.1_linux_amd64.tar.gz
+```
 
-4. **ripgrep** (for Telescope grep functionality)
-   ```bash
-   # Linux (Debian/Ubuntu)
-   sudo apt install ripgrep
+Verify Neovim version (must be 0.9.0+):
+```bash
+nvim --version
 
-   # Linux (Fedora)
-   sudo dnf install ripgrep
+# If Neovim is too old, install from snap or PPA:
+# Option 1: Snap (recommended)
+sudo snap install nvim --classic
 
-   # macOS
-   brew install ripgrep
+# Option 2: PPA
+sudo add-apt-repository ppa:neovim-ppa/unstable -y
+sudo apt update
+sudo apt install neovim
+```
 
-   # Windows (with Chocolatey)
-   choco install ripgrep
+#### Fedora/RHEL
 
-   # Or download from: https://github.com/BurntSushi/ripgrep/releases
-   ```
+```bash
+sudo dnf install -y \
+  neovim \
+  git \
+  gcc \
+  make \
+  ripgrep \
+  fd-find \
+  nodejs \
+  npm \
+  curl \
+  unzip \
+  tar \
+  gzip \
+  python3 \
+  python3-pip \
+  wget
 
-5. **Node.js and npm** (for LSP servers and some plugins)
-   ```bash
-   # Check if installed
-   node --version
-   npm --version
-   ```
+# Install glow
+wget https://github.com/charmbracelet/glow/releases/download/v1.5.1/glow_1.5.1_linux_amd64.tar.gz
+tar -xzf glow_1.5.1_linux_amd64.tar.gz
+sudo mv glow /usr/local/bin/
+rm glow_1.5.1_linux_amd64.tar.gz
+```
 
-6. **C Compiler** (for Tree-sitter)
-   - **Linux**: `build-essential` (Debian/Ubuntu) or `base-devel` (Arch)
-   - **macOS**: Xcode Command Line Tools (`xcode-select --install`)
-   - **Windows**: Visual Studio Build Tools or MinGW-w64
+#### macOS
 
-### Optional but Recommended
+```bash
+# Install Homebrew if not already installed
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-- **fd** (faster file finding)
-  ```bash
-  # Linux (Debian/Ubuntu)
-  sudo apt install fd-find
+# Install dependencies
+brew install neovim git ripgrep fd node curl wget python3 glow
+```
 
-  # macOS
-  brew install fd
+#### Windows (PowerShell as Administrator)
 
-  # Windows
-  choco install fd
-  ```
+```powershell
+# Install Chocolatey if not already installed
+Set-ExecutionPolicy Bypass -Scope Process -Force
+[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 
-- **lazygit** (enhanced git UI)
-  ```bash
-  # Linux/macOS
-  # See: https://github.com/jesseduffield/lazygit#installation
+# Install dependencies
+choco install -y neovim git ripgrep fd nodejs python curl wget
 
-  # Windows
-  choco install lazygit
-  ```
+# Install Visual Studio Build Tools for C compilation
+choco install -y visualstudio2022buildtools
+```
+
+### Additional Requirements
+
+#### Nerd Font (Required for icons)
+- Download from [Nerd Fonts](https://www.nerdfonts.com/)
+- Recommended: JetBrainsMono Nerd Font, FiraCode Nerd Font, or Hack Nerd Font
+- Install the font and configure your terminal to use it
+- **Note**: Font is installed on your local machine, not the remote server if using SSH
+
+### Optional Performance Boost
+
+#### Rust/Cargo (for 6x faster completion with blink.cmp)
+
+```bash
+# Linux/macOS/WSL
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+source "$HOME/.cargo/env"
+
+# Windows
+choco install -y rust
+```
+
+After installing Rust, blink.cmp will automatically compile with `cargo build --release` for significant performance improvements.
 
 ---
 
