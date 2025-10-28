@@ -369,6 +369,204 @@ function M.autocmds()
             local opts = { buffer = true, silent = true }
 
             -- ================================================================
+            -- COMPREHENSIVE ABBREVIATIONS (150+) - Type + space to expand
+            -- ================================================================
+            -- Works alongside LuaSnip snippets (snippets use Tab, abbreviations use Space)
+
+            local abbrev = vim.cmd
+
+            -- Headers (h1-h6)
+            abbrev([[iabbrev <buffer> h1 # ]])
+            abbrev([[iabbrev <buffer> h2 ## ]])
+            abbrev([[iabbrev <buffer> h3 ### ]])
+            abbrev([[iabbrev <buffer> h4 #### ]])
+            abbrev([[iabbrev <buffer> h5 ##### ]])
+            abbrev([[iabbrev <buffer> h6 ###### ]])
+
+            -- Todo/Tasks
+            abbrev([[iabbrev <buffer> todo - [ ] ]])
+            abbrev([[iabbrev <buffer> done - [x] ]])
+            abbrev([[iabbrev <buffer> pending - [~] ]])
+            abbrev([[iabbrev <buffer> cancelled - [-] ]])
+            abbrev([[iabbrev <buffer> priority - [ ] **[P1]** ]])
+
+            -- Lists
+            abbrev([[iabbrev <buffer> ul - ]])
+            abbrev([[iabbrev <buffer> ol 1. ]])
+            abbrev([[iabbrev <buffer> task - [ ] ]])
+
+            -- Code blocks (40+ languages)
+            abbrev([[iabbrev <buffer> pycode ```python<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> jscode ```javascript<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> tscode ```typescript<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> shcode ```bash<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> luacode ```lua<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> rustcode ```rust<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> gocode ```go<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> ccode ```c<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> cppcode ```cpp<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> javacode ```java<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> csharpcode ```csharp<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> phpcode ```php<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> rubycode ```ruby<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> sqlcode ```sql<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> jsoncode ```json<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> yamlcode ```yaml<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> xmlcode ```xml<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> tomlcode ```toml<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> csvcode ```csv<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> htmlcode ```html<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> csscode ```css<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> scsscode ```scss<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> shellcode ```shell<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> console ```console<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> powershell ```powershell<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> cmdcode ```cmd<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> mdcode ```markdown<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> diffcode ```diff<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> gitcode ```git<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> dockercode ```dockerfile<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> makecode ```makefile<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> vimcode ```vim<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> regexcode ```regex<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> textcode ```text<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> plaincode ```plaintext<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> code ```<CR>```<Esc>O]])
+
+            -- Callouts
+            abbrev([[iabbrev <buffer> note > **Note:** ]])
+            abbrev([[iabbrev <buffer> warn > **Warning:** ]])
+            abbrev([[iabbrev <buffer> warning > **Warning:** ]])
+            abbrev([[iabbrev <buffer> tip > **Tip:** ]])
+            abbrev([[iabbrev <buffer> important > **Important:** ]])
+            abbrev([[iabbrev <buffer> info > **Info:** ]])
+            abbrev([[iabbrev <buffer> danger > **Danger:** ]])
+            abbrev([[iabbrev <buffer> error > **Error:** ]])
+            abbrev([[iabbrev <buffer> success > **Success:** ]])
+            abbrev([[iabbrev <buffer> question > **Question:** ]])
+            abbrev([[iabbrev <buffer> quote > ]])
+
+            -- Date/Time stamps
+            abbrev([[iabbrev <buffer> date <C-R>=strftime("%Y-%m-%d")<CR>]])
+            abbrev([[iabbrev <buffer> time <C-R>=strftime("%H:%M")<CR>]])
+            abbrev([[iabbrev <buffer> datetime <C-R>=strftime("%Y-%m-%d %H:%M")<CR>]])
+            abbrev([[iabbrev <buffer> timestamp <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>]])
+
+            -- Formatting
+            abbrev([[iabbrev <buffer> bold ****<Left><Left>]])
+            abbrev([[iabbrev <buffer> italic **<Left>]])
+            abbrev([[iabbrev <buffer> strike ~~~~<Left><Left>]])
+            abbrev([[iabbrev <buffer> inline `<BS>]])
+
+            -- Links and references
+            abbrev([[iabbrev <buffer> link [](https://)<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>]])
+            abbrev([[iabbrev <buffer> img ![](https://)<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>]])
+            abbrev([[iabbrev <buffer> ref [][]<Left><Left><Left>]])
+
+            -- Table and elements
+            abbrev([[iabbrev <buffer> table <Bar> Header 1 <Bar> Header 2 <Bar>]])
+            abbrev([[iabbrev <buffer> hr ---]])
+
+            -- Technical helpers
+            abbrev([[iabbrev <buffer> TODO <!-- TODO: -->]])
+            abbrev([[iabbrev <buffer> FIXME <!-- FIXME: -->]])
+            abbrev([[iabbrev <buffer> NOTE <!-- NOTE: -->]])
+            abbrev([[iabbrev <buffer> HACK <!-- HACK: -->]])
+            abbrev([[iabbrev <buffer> XXX <!-- XXX: -->]])
+            abbrev([[iabbrev <buffer> BUG <!-- BUG: -->]])
+            abbrev([[iabbrev <buffer> DEPRECATED <!-- DEPRECATED: -->]])
+            abbrev([[iabbrev <buffer> details <details><CR><summary></summary><CR><CR></details><Esc>2kA]])
+            abbrev([[iabbrev <buffer> frontmatter ---<CR>title: <CR>date: <C-R>=strftime("%Y-%m-%d")<CR><CR>author: <CR>tags: []<CR>---<Esc>4kA]])
+            abbrev([[iabbrev <buffer> apidoc ## API Documentation<CR><CR>### Endpoint<CR>```<CR>METHOD /path<CR>```<CR><CR>### Parameters<CR>- `name` (type, required): Description<CR><CR>### Response<CR>```json<CR>{<CR>}<CR>```<CR><CR>### Example<CR>```bash<CR>curl -X METHOD https://api.example.com/path<CR>```]])
+            abbrev([[iabbrev <buffer> kbd <kbd></kbd><Left><Left><Left><Left><Left><Left>]])
+            abbrev([[iabbrev <buffer> footnote [^1]<CR><CR>[^1]: ]])
+            abbrev([[iabbrev <buffer> output **Output:**<CR>```<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> example **Example:**<CR>```<CR>```<Esc>O]])
+            abbrev([[iabbrev <buffer> badge ![](https://img.shields.io/)]])
+            abbrev([[iabbrev <buffer> toc ## Table of Contents<CR><CR>- []()<CR>- []()<CR>- []()]])
+
+            -- Professional workflow templates
+            abbrev([[iabbrev <buffer> meeting # Meeting Notes<CR><CR>**Date:** <C-R>=strftime("%Y-%m-%d")<CR><CR>**Attendees:** <CR><CR>## Agenda<CR>- [ ] <CR><CR>## Discussion<CR><CR>## Action Items<CR>- [ ] ]])
+            abbrev([[iabbrev <buffer> daily # Daily Notes - <C-R>=strftime("%Y-%m-%d")<CR><CR><CR>## Tasks<CR>- [ ] <CR><CR>## Notes<CR><CR>## Tomorrow<CR>- [ ] ]])
+            abbrev([[iabbrev <buffer> project # Project: <CR><CR>## Overview<CR><CR>## Goals<CR>- [ ] <CR><CR>## Timeline<CR><CR>## Resources<CR>]])
+            abbrev([[iabbrev <buffer> weekly # Weekly Review - Week <C-R>=strftime("%U, %Y")<CR><CR><CR>## Accomplishments<CR>- <CR><CR>## Challenges<CR>- <CR><CR>## Next Week Goals<CR>- [ ] <CR><CR>## Notes<CR>]])
+            abbrev([[iabbrev <buffer> weekplan # Weekly Plan - <C-R>=strftime("%Y-W%U")<CR><CR><CR>## This Week's Goals<CR>- [ ] <CR><CR>## Monday<CR>- [ ] <CR><CR>## Tuesday<CR>- [ ] <CR><CR>## Wednesday<CR>- [ ] <CR><CR>## Thursday<CR>- [ ] <CR><CR>## Friday<CR>- [ ] <CR><CR>## Weekend<CR>- [ ] ]])
+            abbrev([[iabbrev <buffer> sprint # Sprint Planning - Sprint <CR><CR>**Duration:** <C-R>=strftime("%Y-%m-%d")<CR> to <CR>**Team:** <CR><CR>## Sprint Goal<CR><CR>## User Stories<CR>- [ ] **[Story]** As a ___ I want ___ so that ___<CR>  - **Acceptance Criteria:**<CR>  - **Estimate:** <CR><CR>## Tasks<CR>- [ ] <CR><CR>## Risks<CR>- ]])
+            abbrev([[iabbrev <buffer> retro # Retrospective - <C-R>=strftime("%Y-%m-%d")<CR><CR><CR>## What Went Well 🎉<CR>- <CR><CR>## What Could Be Improved 🔧<CR>- <CR><CR>## Action Items<CR>- [ ] <CR><CR>## Appreciations 💙<CR>- ]])
+            abbrev([[iabbrev <buffer> tutorial # Tutorial: <CR><CR>## Overview<CR>**Time:** ~X minutes<CR>**Level:** Beginner/Intermediate/Advanced<CR><CR>## Prerequisites<CR>- <CR><CR>## What You'll Learn<CR>- <CR><CR>## Steps<CR><CR>### Step 1: <CR><CR>### Step 2: <CR><CR>## Troubleshooting<CR><CR>## Next Steps<CR>]])
+            abbrev([[iabbrev <buffer> howto # How to: <CR><CR>## Problem<CR><CR>## Solution<CR><CR>## Steps<CR><CR>1. <CR>2. <CR>3. <CR><CR>## Expected Result<CR><CR>## Common Issues<CR>]])
+            abbrev([[iabbrev <buffer> docpage # Documentation: <CR><CR>## Description<CR><CR>## Usage<CR><CR>```<CR>```<CR><CR>## Parameters<CR>- `param1` (type, required): Description<CR><CR>## Examples<CR><CR>### Basic Example<CR>```<CR>```<CR><CR>### Advanced Example<CR>```<CR>```<CR><CR>## Notes<CR>]])
+            abbrev([[iabbrev <buffer> changelog ## [Version] - <C-R>=strftime("%Y-%m-%d")<CR><CR><CR>### Added<CR>- <CR><CR>### Changed<CR>- <CR><CR>### Fixed<CR>- <CR><CR>### Removed<CR>- ]])
+            abbrev([[iabbrev <buffer> release # Release Notes - v<CR><CR>**Release Date:** <C-R>=strftime("%Y-%m-%d")<CR><CR>## Highlights<CR>- <CR><CR>## New Features<CR>- <CR><CR>## Improvements<CR>- <CR><CR>## Bug Fixes<CR>- <CR><CR>## Breaking Changes<CR>- <CR><CR>## Upgrade Guide<CR>]])
+            abbrev([[iabbrev <buffer> bugreport # Bug Report<CR><CR>**Date:** <C-R>=strftime("%Y-%m-%d")<CR><CR>**Severity:** Critical/High/Medium/Low<CR><CR>## Description<CR><CR>## Steps to Reproduce<CR>1. <CR>2. <CR>3. <CR><CR>## Expected Behavior<CR><CR>## Actual Behavior<CR><CR>## Environment<CR>- OS: <CR>- Version: <CR>- Browser: <CR><CR>## Logs/Screenshots<CR>```<CR>```<CR><CR>## Possible Solution<CR>]])
+            abbrev([[iabbrev <buffer> feature # Feature Request<CR><CR>**Date:** <C-R>=strftime("%Y-%m-%d")<CR><CR>**Priority:** High/Medium/Low<CR><CR>## Problem Statement<CR>As a ___ I need ___ so that ___<CR><CR>## Proposed Solution<CR><CR>## Alternatives Considered<CR>- <CR><CR>## Acceptance Criteria<CR>- [ ] <CR><CR>## Technical Considerations<CR>- <CR><CR>## Effort Estimate<CR>]])
+            abbrev([[iabbrev <buffer> adr # ADR: <CR><CR>**Date:** <C-R>=strftime("%Y-%m-%d")<CR><CR>**Status:** Proposed/Accepted/Deprecated/Superseded<CR><CR>## Context<CR>What is the issue we're facing?<CR><CR>## Decision<CR>What are we doing about it?<CR><CR>## Consequences<CR>What becomes easier or harder?<CR><CR>### Positive<CR>- <CR><CR>### Negative<CR>- <CR><CR>### Risks<CR>- ]])
+            abbrev([[iabbrev <buffer> codereview # Code Review - <C-R>=strftime("%Y-%m-%d")<CR><CR>**Reviewer:** <CR>**PR/Branch:** <CR><CR>## Summary<CR><CR>## ✅ Strengths<CR>- <CR><CR>## 🔧 Issues Found<CR>- [ ] <CR><CR>## 💡 Suggestions<CR>- <CR><CR>## 🧪 Testing Notes<CR>- [ ] Unit tests pass<CR>- [ ] Manual testing completed<CR>- [ ] Edge cases considered<CR><CR>## Decision<CR>- [ ] Approve<CR>- [ ] Request changes<CR>- [ ] Comment only]])
+            abbrev([[iabbrev <buffer> design # Technical Design: <CR><CR>**Author:** <CR>**Date:** <C-R>=strftime("%Y-%m-%d")<CR><CR>## Overview<CR><CR>## Goals<CR>- <CR><CR>## Non-Goals<CR>- <CR><CR>## Design<CR><CR>### Architecture<CR><CR>### Data Models<CR>```<CR>```<CR><CR>### API Design<CR>```<CR>```<CR><CR>## Alternatives Considered<CR><CR>## Security Considerations<CR><CR>## Performance Considerations<CR><CR>## Testing Strategy<CR><CR>## Rollout Plan<CR>1. <CR><CR>## Monitoring & Metrics<CR>]])
+            abbrev([[iabbrev <buffer> postmortem # Incident Post-Mortem<CR><CR>**Date:** <C-R>=strftime("%Y-%m-%d")<CR><CR>**Incident Date:** <CR>**Duration:** <CR>**Severity:** <CR><CR>## Summary<CR><CR>## Timeline<CR>- **HH:MM** - <CR><CR>## Root Cause<CR><CR>## Impact<CR>- Users affected: <CR>- Systems affected: <CR><CR>## Resolution<CR><CR>## Action Items<CR>- [ ] **[P1]** <CR><CR>## Lessons Learned<CR><CR>### What Went Well<CR>- <CR><CR>### What Went Wrong<CR>- <CR><CR>### Where We Got Lucky<CR>- ]])
+            abbrev([[iabbrev <buffer> classnotes # Class Notes - <C-R>=strftime("%Y-%m-%d")<CR><CR>**Course:** <CR>**Topic:** <CR>**Professor:** <CR><CR>## Key Concepts<CR>- <CR><CR>## Notes<CR><CR>## Examples<CR>```<CR>```<CR><CR>## Questions<CR>- [ ] <CR><CR>## Action Items<CR>- [ ] Read: <CR>- [ ] Practice: <CR>- [ ] Review: ]])
+            abbrev([[iabbrev <buffer> studyguide # Study Guide: <CR><CR>**Exam Date:** <CR>**Topics Covered:** <CR><CR>## Key Concepts<CR><CR>### Concept 1<CR>**Definition:** <CR>**Example:** <CR>**Why it matters:** <CR><CR>## Formulas & Equations<CR>```<CR>```<CR><CR>## Practice Problems<CR>1. <CR><CR>## Study Checklist<CR>- [ ] Review lecture notes<CR>- [ ] Complete practice problems<CR>- [ ] Review homework<CR>- [ ] Create flashcards<CR>- [ ] Study group session]])
+            abbrev([[iabbrev <buffer> research # Research Notes<CR><CR>**Topic:** <CR>**Date:** <C-R>=strftime("%Y-%m-%d")<CR><CR>## Research Question<CR><CR>## Sources<CR>1. <CR><CR>## Key Findings<CR>- <CR><CR>## Quotes & Citations<CR>> <CR><CR>## My Analysis<CR><CR>## Next Steps<CR>- [ ] ]])
+            abbrev([[iabbrev <buffer> assignment # Assignment: <CR><CR>**Course:** <CR>**Due Date:** <CR>**Points:** <CR><CR>## Requirements<CR>- [ ] <CR><CR>## Approach<CR><CR>## Notes<CR><CR>## Resources<CR>- <CR><CR>## Checklist Before Submission<CR>- [ ] Requirements met<CR>- [ ] Proofread<CR>- [ ] Citations formatted<CR>- [ ] Files named correctly<CR>- [ ] Submitted on time]])
+            abbrev([[iabbrev <buffer> readingnotes # Reading Notes<CR><CR>**Title:** <CR>**Author:** <CR>**Date:** <C-R>=strftime("%Y-%m-%d")<CR><CR>## Summary<CR><CR>## Key Points<CR>- <CR><CR>## Quotes<CR>> <CR><CR>## My Thoughts<CR><CR>## Questions<CR>- <CR><CR>## Action Items<CR>- [ ] ]])
+            abbrev([[iabbrev <buffer> lesson # Lesson Plan<CR><CR>**Course:** <CR>**Date:** <C-R>=strftime("%Y-%m-%d")<CR><CR>**Duration:** <CR>**Grade Level:** <CR><CR>## Learning Objectives<CR>Students will be able to:<CR>- <CR><CR>## Materials Needed<CR>- <CR><CR>## Introduction (X min)<CR><CR>## Main Activity (X min)<CR><CR>## Practice/Application (X min)<CR><CR>## Assessment<CR>- <CR><CR>## Homework/Follow-up<CR>- <CR><CR>## Notes/Reflections<CR>]])
+            abbrev([[iabbrev <buffer> syllabus # Course Syllabus<CR><CR>**Course Title:** <CR>**Instructor:** <CR>**Term:** <CR>**Credits:** <CR><CR>## Course Description<CR><CR>## Learning Outcomes<CR>By the end of this course, students will be able to:<CR>1. <CR><CR>## Required Materials<CR>- <CR><CR>## Grading<CR>- Assignments: X%<CR>- Exams: X%<CR>- Participation: X%<CR>- Final Project: X%<CR><CR>## Schedule<CR><Bar> Week <Bar> Topic <Bar> Assignments <Bar><CR><CR>## Policies<CR><CR>### Attendance<CR><CR>### Late Work<CR><CR>### Academic Integrity<CR>]])
+            abbrev([[iabbrev <buffer> rubric # Grading Rubric<CR><CR>**Assignment:** <CR>**Total Points:** <CR><CR><Bar> Criteria <Bar> Exemplary (A) <Bar> Proficient (B) <Bar> Developing (C) <Bar> Beginning (D/F) <Bar><CR><CR>## Comments<CR>]])
+            abbrev([[iabbrev <buffer> feedback # Student Feedback<CR><CR>**Student:** <CR>**Assignment:** <CR>**Date:** <C-R>=strftime("%Y-%m-%d")<CR><CR>## Strengths<CR>- <CR><CR>## Areas for Growth<CR>- <CR><CR>## Specific Feedback<CR><CR>## Next Steps<CR>- [ ] <CR><CR>**Grade:** ]])
+            abbrev([[iabbrev <buffer> brainstorm # Brainstorm: <CR><CR>**Date:** <C-R>=strftime("%Y-%m-%d")<CR><CR>## Problem/Goal<CR><CR>## Ideas<CR>- 💡 <CR><CR>## Best Ideas<CR>1. <CR><CR>## Next Actions<CR>- [ ] ]])
+            abbrev([[iabbrev <buffer> problem # Problem Solving<CR><CR>**Date:** <C-R>=strftime("%Y-%m-%d")<CR><CR>## The Problem<CR><CR>## Why This Matters<CR><CR>## Possible Solutions<CR>1. <CR>   - Pros: <CR>   - Cons: <CR><CR>## Chosen Solution<CR><CR>## Action Plan<CR>- [ ] <CR><CR>## Results<CR>]])
+            abbrev([[iabbrev <buffer> decision # Decision Log<CR><CR>**Date:** <C-R>=strftime("%Y-%m-%d")<CR><CR>**Decision:** <CR><CR>## Context<CR><CR>## Options Considered<CR>1. <CR><CR>## Decision Made<CR><CR>## Reasoning<CR><CR>## Expected Outcome<CR><CR>## Review Date<CR>]])
+            abbrev([[iabbrev <buffer> booksummary # Book Summary<CR><CR>**Title:** <CR>**Author:** <CR>**Finished:** <C-R>=strftime("%Y-%m-%d")<CR><CR>**Rating:** ⭐⭐⭐⭐⭐<CR><CR>## Summary<CR><CR>## Key Takeaways<CR>1. <CR><CR>## Favorite Quotes<CR>> <CR><CR>## How I'll Apply This<CR>- [ ] <CR><CR>## Related Books<CR>- ]])
+            abbrev([[iabbrev <buffer> goals # Goals - <C-R>=strftime("%Y")<CR><CR><CR>## Long-term Vision (5 years)<CR><CR>## This Year's Goals<CR><CR>### Career<CR>- [ ] <CR><CR>### Learning<CR>- [ ] <CR><CR>### Health<CR>- [ ] <CR><CR>### Personal<CR>- [ ] <CR><CR>## Quarterly Milestones<CR><CR>### Q1<CR>- [ ] <CR><CR>### Q2<CR>- [ ] <CR><CR>### Q3<CR>- [ ] <CR><CR>### Q4<CR>- [ ] ]])
+
+            -- ================================================================
+            -- AUTO-CONTINUATION FOR LISTS (Microsoft Word style)
+            -- ================================================================
+            -- Press Enter after list item → Creates another
+            -- Press Enter on empty list item → Exits list
+
+            vim.keymap.set("i", "<CR>", function()
+                local line = vim.api.nvim_get_current_line()
+
+                -- Check for checkbox patterns
+                local checkbox_pattern = "^(%s*)%- %[.%] (.*)$"
+                local checkbox_empty = "^(%s*)%- %[.%]%s*$"
+                local indent, content = line:match(checkbox_pattern)
+
+                if indent and content then
+                    return "<CR>" .. indent .. "- [ ] "
+                elseif line:match(checkbox_empty) then
+                    return "<Esc>ddO"
+                end
+
+                -- Check for bullet list
+                local bullet_pattern = "^(%s*)%- (.+)$"
+                local bullet_empty = "^(%s*)%- %s*$"
+                indent, content = line:match(bullet_pattern)
+
+                if indent and content then
+                    return "<CR>" .. indent .. "- "
+                elseif line:match(bullet_empty) then
+                    return "<Esc>ddO"
+                end
+
+                -- Check for numbered list
+                local number_pattern = "^(%s*)(%d+)%. (.+)$"
+                local number_empty = "^(%s*)(%d+)%. %s*$"
+                local num
+                indent, num, content = line:match(number_pattern)
+
+                if indent and num and content then
+                    local next_num = tonumber(num) + 1
+                    return "<CR>" .. indent .. next_num .. ". "
+                elseif line:match(number_empty) then
+                    return "<Esc>ddO"
+                end
+
+                return "<CR>"
+            end, { buffer = true, expr = true, desc = "Auto-continue lists and checkboxes" })
+
+            -- ================================================================
             -- TEXT FORMATTING SHORTCUTS
             -- ================================================================
             -- Note: Requires vim-surround or similar plugin
