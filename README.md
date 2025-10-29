@@ -30,20 +30,142 @@ Modulus is a comprehensive, production-ready Neovim configuration designed with 
 - **Markdown Support**: Live preview and enhanced editing
 - **Terminal Integration**: Toggleterm for embedded terminals
 
-## 🚀 Quick Start
+## 🚀 Installation
+
+### Prerequisites
+
+**Required:**
+- Neovim 0.9.0+ (`nvim --version` to check)
+- Git
+- A [Nerd Font](https://www.nerdfonts.com/) (for icons)
+- C compiler (gcc/clang/MSVC)
+- ripgrep (for Telescope search)
+- Node.js (for LSP servers)
+
+**Optional but recommended:**
+- Rust/Cargo (for faster completion)
+- fd (alternative to find)
+
+---
+
+### Linux / macOS
+
+<details>
+<summary><b>📦 Install Dependencies (click to expand)</b></summary>
+
+**Ubuntu/Debian:**
+```bash
+sudo apt update && sudo apt install -y neovim git build-essential ripgrep fd-find nodejs npm curl
+```
+
+**Fedora/RHEL:**
+```bash
+sudo dnf install -y neovim git gcc make ripgrep fd-find nodejs npm curl
+```
+
+**macOS (Homebrew):**
+```bash
+brew install neovim git ripgrep fd node
+```
+
+**Install Nerd Font:**
+- Download from https://www.nerdfonts.com/
+- Recommended: JetBrainsMono Nerd Font or FiraCode Nerd Font
+- Configure your terminal to use the font
+
+</details>
+
+**Install Modulus-nvim:**
 
 ```bash
-# Clone the repository
+# 1. Backup existing config (if any)
+mv ~/.config/nvim ~/.config/nvim.backup
+mv ~/.local/share/nvim ~/.local/share/nvim.backup
+
+# 2. Clone this repository
 git clone https://github.com/EvanusModestus/modulus-nvim.git ~/.config/nvim
 
-# Launch Neovim (plugins will auto-install)
+# 3. Launch Neovim (plugins auto-install on first launch)
 nvim
+```
 
-# Install language servers
+That's it! Skip to [Post-Install Setup](#post-install-setup).
+
+---
+
+### Windows
+
+<details>
+<summary><b>📦 Install Dependencies (click to expand)</b></summary>
+
+**Using Chocolatey (PowerShell as Administrator):**
+
+```powershell
+# Install Chocolatey if needed
+Set-ExecutionPolicy Bypass -Scope Process -Force
+iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
+# Install dependencies
+choco install -y neovim git ripgrep fd nodejs python visualstudio2022buildtools
+```
+
+**Install Nerd Font:**
+- Download from https://www.nerdfonts.com/
+- Install the font (double-click `.ttf` files)
+- Configure Windows Terminal or your terminal to use the font
+
+</details>
+
+**Install Modulus-nvim:**
+
+```powershell
+# 1. Backup existing config (if any)
+Move-Item -Path "$env:LOCALAPPDATA\nvim" -Destination "$env:LOCALAPPDATA\nvim.backup" -ErrorAction SilentlyContinue
+
+# 2. Clone this repository
+git clone https://github.com/EvanusModestus/modulus-nvim.git $env:LOCALAPPDATA\nvim
+
+# 3. Launch Neovim (plugins auto-install on first launch)
+nvim
+```
+
+That's it! Skip to [Post-Install Setup](#post-install-setup).
+
+---
+
+### WSL (Windows Subsystem for Linux)
+
+Follow the same steps as **[Linux / macOS](#linux--macos)** above.
+
+---
+
+### Post-Install Setup
+
+After first launch, install language support:
+
+```vim
+" 1. Install Tree-sitter parsers for syntax highlighting
+:TSInstall all
+
+" 2. Install language servers (opens Mason UI)
 :Mason
 ```
 
-For detailed installation instructions, see **[INSTALLATION.md](INSTALLATION.md)**.
+**In Mason:** Press `/` to search, `i` to install, `q` to quit.
+
+**Recommended servers:**
+- Lua: `lua-language-server`
+- Python: `pyright`
+- JavaScript/TypeScript: `typescript-language-server`
+- Go: `gopls`
+- Rust: `rust-analyzer`
+
+**Verify everything works:**
+```vim
+:checkhealth
+```
+
+For detailed troubleshooting, see **[INSTALLATION.md](INSTALLATION.md)**.
 
 ## 📁 Modular Architecture
 
