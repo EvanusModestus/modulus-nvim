@@ -36,12 +36,8 @@ CLAUDE_SESSION_NOTES.md
 /tmp/
 *.txt.backup
 
-# Claude Code cache, logs, and settings (machine-specific)
-.claude/cache/
-.claude/logs/
-.claude/*.log
-.claude/sessions/
-.claude/settings.local.json
+# Claude Code directory (machine-specific, NEVER commit to public repo)
+.claude/
 
 # Personal/private directories (not for public repo)
 /04_COMPREHENSIVE_TEST_SUITE/
