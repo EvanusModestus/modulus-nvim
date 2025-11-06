@@ -82,18 +82,28 @@ local plugins = {
             require('evanusmodestus.modules.plugins.treesitter').setup()
         end,
     },
-    'nvim-treesitter/playground',
-    'nvim-treesitter/nvim-treesitter-context',
+    {
+        'nvim-treesitter/playground',
+        cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' },  -- Load on command
+    },
+    {
+        'nvim-treesitter/nvim-treesitter-context',
+        event = 'BufReadPost',  -- Load after buffer read
+    },
 
     -- Primeagen essentials
     {
         'theprimeagen/harpoon',
+        keys = { '<leader>a', '<C-e>', '<C-h>', '<C-t>', '<C-n>', '<C-s>' },  -- Load on first keypress
         config = function()
-            require('evanusmodestus.modules.plugins.harpoon').keymaps()
+            local harpoon = require('evanusmodestus.modules.plugins.harpoon')
+            harpoon.setup()   -- Configure UI with wider window
+            harpoon.keymaps() -- Set up keybindings
         end
     },
     {
         'theprimeagen/refactoring.nvim',
+        keys = { { '<leader>re', mode = { 'n', 'x' } } },  -- Load on refactoring keypress
         config = function()
             local refactoring = require('evanusmodestus.modules.plugins.refactoring')
             refactoring.setup()
@@ -102,24 +112,37 @@ local plugins = {
     },
     {
         'mbbill/undotree',
+        cmd = 'UndotreeToggle',  -- Load on :UndotreeToggle command
+        keys = '<leader>u',       -- Or on keypress
         config = function()
             require('evanusmodestus.modules.plugins.undotree').keymaps()
         end
     },
     {
         'tpope/vim-fugitive',
+        cmd = { 'Git', 'G', 'Gdiffsplit', 'Gvdiffsplit', 'Gwrite', 'Gread' },  -- Load on git commands
+        keys = { '<leader>gs', '<leader>gp' },  -- Or on git keybindings
         config = function()
             require('evanusmodestus.modules.plugins.fugitive').keymaps()
         end
     },
 
     -- UI and aesthetics
-    'nvim-tree/nvim-web-devicons',
-    'folke/zen-mode.nvim',
-    'github/copilot.vim',
-    'eandrju/cellular-automaton.nvim',
+    {
+        'nvim-tree/nvim-web-devicons',
+        lazy = true,  -- Loaded as dependency by other plugins
+    },
+    {
+        'folke/zen-mode.nvim',
+        cmd = 'ZenMode',  -- Only load on :ZenMode command
+    },
+    {
+        'github/copilot.vim',
+        event = 'InsertEnter',  -- Only load when entering insert mode
+    },
     {
         'laytan/cloak.nvim',
+        ft = { 'sh', 'bash', 'zsh', 'fish', 'env', 'dotenv', 'yaml', 'json', 'toml', 'conf', 'config' },
         config = function()
             require('evanusmodestus.modules.plugins.cloak').setup()
         end
@@ -128,12 +151,14 @@ local plugins = {
     -- Visual improvements
     {
         'machakann/vim-highlightedyank',
+        event = 'TextYankPost',
         config = function()
             vim.g.highlightedyank_highlight_duration = 200
         end,
     },
     {
         'RRethy/vim-illuminate',
+        event = 'BufReadPost',
         config = function()
             require('illuminate').configure({
                 delay = 200,
@@ -162,7 +187,10 @@ local plugins = {
             require('evanusmodestus.modules.plugins.autopairs').setup()
         end
     },
-    'windwp/nvim-ts-autotag',
+    {
+        'windwp/nvim-ts-autotag',
+        ft = { 'html', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'svelte', 'vue', 'tsx', 'jsx', 'xml', 'markdown' },
+    },
     {
         'lewis6991/gitsigns.nvim',
         config = function()
@@ -182,7 +210,10 @@ local plugins = {
             require('evanusmodestus.modules.ui.lualine').setup()
         end
     },
-    'lukas-reineke/indent-blankline.nvim',
+    {
+        'lukas-reineke/indent-blankline.nvim',
+        event = 'BufReadPost',
+    },
     {
         'norcalli/nvim-colorizer.lua',
         config = function()
@@ -191,9 +222,20 @@ local plugins = {
     },
 
     -- Database
-    'tpope/vim-dadbod',
-    'kristijanhusak/vim-dadbod-ui',
-    'kristijanhusak/vim-dadbod-completion',
+    {
+        'tpope/vim-dadbod',
+        cmd = 'DB',
+    },
+    {
+        'kristijanhusak/vim-dadbod-ui',
+        cmd = { 'DBUI', 'DBUIToggle', 'DBUIAddConnection', 'DBUIFindBuffer' },
+        dependencies = { 'tpope/vim-dadbod' },
+    },
+    {
+        'kristijanhusak/vim-dadbod-completion',
+        ft = { 'sql', 'mysql', 'plsql' },
+        dependencies = { 'tpope/vim-dadbod' },
+    },
 
     -- Debugging
     {
