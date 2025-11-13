@@ -262,29 +262,6 @@ local plugins = {
         end
     },
 
-    -- Markdown Preview
-    {
-        'iamcco/markdown-preview.nvim',
-        cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
-        ft = { 'markdown' },
-        build = 'cd app && npm install',
-        init = function()
-            vim.g.mkdp_filetypes = { 'markdown' }
-            -- Auto-detect environment and use appropriate browser command
-            local handle = io.popen('uname -r')
-            local kernel = handle:read('*a')
-            handle:close()
-
-            if kernel:match('[Mm]icrosoft') then
-                -- WSL detected
-                vim.g.mkdp_browser = 'wsl-open'
-            else
-                -- Native Linux (Arch VM, etc.)
-                vim.g.mkdp_browser = 'firefox'
-            end
-        end,
-    },
-
     -- Glow markdown viewer
     {
         'ellisonleao/glow.nvim',
@@ -304,8 +281,8 @@ local plugins = {
         opts = {
             workspaces = {
                 {
-                    name = 'Aethelred-Codex',
-                    path = '~/Aethelred-Codex',
+                    name = 'personal-vault',
+                    path = '~/obsidian-vault',  -- CHANGE THIS: Update to your vault path
                 },
             },
             completion = {
@@ -445,7 +422,7 @@ local plugins = {
         'saghen/blink.cmp',
         lazy = false,
         version = 'v0.*',
-        build = 'cargo build --release', -- Optional: Uncomment if you have Rust/cargo installed for 6x faster fuzzy matching
+        build = 'cargo build --release',
         dependencies = {
             'L3MON4D3/LuaSnip',
             'rafamadriz/friendly-snippets',

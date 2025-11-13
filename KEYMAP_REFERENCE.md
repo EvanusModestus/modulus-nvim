@@ -158,4 +158,4 @@
 - **Individual plugins**: `lua/evanusmodestus/modules/plugins/*.lua`
 
 ---
-*💡 Pro tip: Use `:Telescope keymaps` and type what you're looking for!*
+*Pro tip: Use `:Telescope keymaps` and type what you're looking for!*

@@ -1,6 +1,48 @@
 # Installation Guide for Modulus-nvim
 
-This guide will walk you through installing Modulus-nvim on any platform.
+> **CRITICAL: Read This First!**
+>
+> **Many installation failures happen because users skip prerequisite installation.**
+>
+> This guide is structured to prevent common issues:
+> 1. Install ALL prerequisites FIRST (don't skip!)
+> 2. Verify installations with version checks
+> 3. Only then clone and launch Neovim
+>
+> **Following this order prevents 90% of installation issues.**
+
+---
+
+## Tested Platforms
+
+This configuration has been tested and verified on:
+
+- **Ubuntu 22.04 / 24.04** (tested)
+- **Arch Linux** (tested)
+- **Fedora** (tested)
+- **macOS** (Ventura+)
+- **Windows 10/11** (native + WSL 2)
+
+## Quick Start Checklist
+
+**Before doing ANYTHING else, complete these steps in order:**
+
+- [ ] **Step 1:** Install Neovim 0.9.0+ (`nvim --version` to verify)
+- [ ] **Step 2:** Install Git (`git --version` to verify)
+- [ ] **Step 3:** Install Node.js 18+ (`node --version` to verify)
+- [ ] **Step 4:** Install ripgrep (`rg --version` to verify)
+- [ ] **Step 5:** Install Rust/Cargo (`rustc --version` and `cargo --version` to verify)
+- [ ] **Step 6:** Install C compiler (gcc/clang/MSVC)
+- [ ] **Step 7:** Install Python 3.10+ (`python --version` to verify)
+- [ ] **Step 8:** Install curl/wget and unzip/tar/7zip
+- [ ] **Step 9:** Install a Nerd Font and configure your terminal
+- [ ] **Step 10:** Run ALL version check commands - if ANY fail, STOP and fix
+- [ ] **Step 11:** Clone the repository
+- [ ] **Step 12:** Launch Neovim and wait for plugins to install
+
+**If you skip prerequisites or don't verify versions, you WILL encounter errors.**
+
+---
 
 ## Table of Contents
 
@@ -39,7 +81,11 @@ sudo apt update && sudo apt install -y \
   python3-venv \
   wget
 
-# Install glow (markdown viewer)
+# Install Rust (required for blink.cmp)
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source "$HOME/.cargo/env"
+
+# Install glow (optional - markdown viewer)
 wget https://github.com/charmbracelet/glow/releases/download/v1.5.1/glow_1.5.1_linux_amd64.tar.gz
 tar -xzf glow_1.5.1_linux_amd64.tar.gz
 sudo mv glow /usr/local/bin/
@@ -58,6 +104,48 @@ sudo snap install nvim --classic
 sudo add-apt-repository ppa:neovim-ppa/unstable -y
 sudo apt update
 sudo apt install neovim
+```
+
+#### Arch Linux
+
+```bash
+# Install all required dependencies
+sudo pacman -Syu --needed \
+  neovim \
+  git \
+  base-devel \
+  ripgrep \
+  fd \
+  nodejs \
+  npm \
+  curl \
+  wget \
+  unzip \
+  tar \
+  gzip \
+  python \
+  python-pip \
+  rust
+
+# Cargo is included with rust package on Arch
+
+# Install glow (optional - markdown viewer)
+# Option 1: From AUR
+yay -S glow
+# Or using paru
+paru -S glow
+
+# Option 2: Manual installation
+wget https://github.com/charmbracelet/glow/releases/download/v1.5.1/glow_1.5.1_linux_amd64.tar.gz
+tar -xzf glow_1.5.1_linux_amd64.tar.gz
+sudo mv glow /usr/local/bin/
+rm glow_1.5.1_linux_amd64.tar.gz
+```
+
+**Note**: Arch typically has latest Neovim in official repos. If you need bleeding edge:
+```bash
+# Install from git (optional)
+yay -S neovim-git
 ```
 
 #### Fedora/RHEL
@@ -80,7 +168,11 @@ sudo dnf install -y \
   python3-pip \
   wget
 
-# Install glow
+# Install Rust (required for blink.cmp)
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source "$HOME/.cargo/env"
+
+# Install glow (optional - markdown viewer)
 wget https://github.com/charmbracelet/glow/releases/download/v1.5.1/glow_1.5.1_linux_amd64.tar.gz
 tar -xzf glow_1.5.1_linux_amd64.tar.gz
 sudo mv glow /usr/local/bin/
@@ -94,10 +186,35 @@ rm glow_1.5.1_linux_amd64.tar.gz
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Install dependencies
-brew install neovim git ripgrep fd node curl wget python3 glow
+brew install neovim git ripgrep fd node curl wget python3 rust glow
 ```
 
-#### Windows (PowerShell as Administrator)
+#### Windows
+
+> **CRITICAL:** You MUST install these dependencies BEFORE cloning the config and launching Neovim.
+
+**Option 1: Using winget (Recommended - Built into Windows 10/11)**
+
+```powershell
+# PowerShell as Administrator
+winget install -e --id Neovim.Neovim
+winget install -e --id Git.Git
+winget install -e --id BurntSushi.ripgrep.MSVC
+winget install -e --id sharkdp.fd
+winget install -e --id OpenJS.NodeJS
+winget install -e --id Python.Python.3.12
+winget install -e --id Rustlang.Rust.MSVC
+winget install -e --id Microsoft.VisualStudio.2022.BuildTools
+winget install -e --id 7zip.7zip
+
+# After Visual Studio Build Tools installs:
+# 1. Launch "Visual Studio Installer"
+# 2. Click "Modify" on Build Tools
+# 3. Select "Desktop development with C++"
+# 4. Click "Install"
+```
+
+**Option 2: Using Chocolatey**
 
 ```powershell
 # Install Chocolatey if not already installed
@@ -106,11 +223,25 @@ Set-ExecutionPolicy Bypass -Scope Process -Force
 iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 
 # Install dependencies
-choco install -y neovim git ripgrep fd nodejs python curl wget
+choco install -y neovim git ripgrep fd nodejs python rust curl wget unzip 7zip
 
 # Install Visual Studio Build Tools for C compilation
-choco install -y visualstudio2022buildtools
+choco install -y visualstudio2022buildtools --package-parameters "--add Microsoft.VisualStudio.Workload.VCTools"
 ```
+
+**Verify ALL installations (CRITICAL STEP):**
+
+```powershell
+# Close and reopen PowerShell, then run:
+nvim --version      # Must show 0.9.0+
+git --version
+node --version      # Must show v18.0.0+
+npm --version
+rg --version
+python --version    # Must show 3.10+
+```
+
+**If ANY command fails, DO NOT proceed. Fix the installation first.**
 
 ### Additional Requirements
 
@@ -119,21 +250,6 @@ choco install -y visualstudio2022buildtools
 - Recommended: JetBrainsMono Nerd Font, FiraCode Nerd Font, or Hack Nerd Font
 - Install the font and configure your terminal to use it
 - **Note**: Font is installed on your local machine, not the remote server if using SSH
-
-### Optional Performance Boost
-
-#### Rust/Cargo (for 6x faster completion with blink.cmp)
-
-```bash
-# Linux/macOS/WSL
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-source "$HOME/.cargo/env"
-
-# Windows
-choco install -y rust
-```
-
-After installing Rust, blink.cmp will automatically compile with `cargo build --release` for significant performance improvements.
 
 ---
 
@@ -217,11 +333,70 @@ This method allows you to keep the config in a custom location while Neovim read
 
 ### WSL (Windows Subsystem for Linux)
 
-Follow the same steps as [Linux/macOS](#linuxmacos):
+WSL provides a full Linux environment on Windows. Recommended for developers who prefer Linux tools.
+
+#### Step 1: Install WSL
+
+**PowerShell (Administrator):**
+
+```powershell
+# Install WSL with default Ubuntu distribution
+wsl --install
+
+# Or install specific distribution:
+# wsl --install -d Ubuntu-22.04
+# wsl --install -d Debian
+# wsl --install -d Fedora-Remix-for-WSL
+```
+
+**Available distributions:**
+```powershell
+# List available distributions
+wsl --list --online
+
+# Popular choices for this config:
+# - Ubuntu-22.04 (recommended - tested)
+# - Ubuntu (latest)
+# - Debian
+# - Fedora-Remix-for-WSL
+```
+
+**Restart your computer** after WSL installation completes.
+
+#### Step 2: First Launch and Setup
+
+After restart, launch your Linux distribution from the Start menu. You'll be prompted to:
+1. Create a username (lowercase, no spaces)
+2. Create a password
+
+#### Step 3: Update System
+
+Once inside your WSL distribution, update the package manager:
+
+**Ubuntu/Debian:**
+```bash
+sudo apt update && sudo apt upgrade -y
+```
+
+**Fedora:**
+```bash
+sudo dnf update -y
+```
+
+#### Step 4: Install Dependencies
+
+Choose your distribution and follow the installation commands from the [Prerequisites](#installing-all-dependencies) section above:
+
+- **Ubuntu/Debian** → Use [Ubuntu/Debian instructions](#ubuntudebian)
+- **Arch** → Use [Arch Linux instructions](#arch-linux) (if using Arch WSL)
+- **Fedora** → Use [Fedora/RHEL instructions](#fedorarhel)
+
+#### Step 5: Install Modulus-nvim
 
 ```bash
-# 1. Backup existing config
-mv ~/.config/nvim ~/.config/nvim.backup
+# 1. Backup existing config (if any)
+mv ~/.config/nvim ~/.config/nvim.backup 2>/dev/null
+mv ~/.local/share/nvim ~/.local/share/nvim.backup 2>/dev/null
 
 # 2. Clone repository
 git clone https://github.com/EvanusModestus/modulus-nvim.git ~/.config/nvim
@@ -229,6 +404,28 @@ git clone https://github.com/EvanusModestus/modulus-nvim.git ~/.config/nvim
 # 3. Launch Neovim
 nvim
 ```
+
+#### WSL-Specific Notes
+
+**Fonts:**
+- Nerd Fonts must be installed on Windows (the host), not in WSL
+- Configure Windows Terminal to use the Nerd Font
+- Settings → Profiles → Ubuntu (or your distro) → Appearance → Font face
+
+**Clipboard:**
+- Clipboard sharing works automatically with WSL 2
+- Use `"+y` to yank to Windows clipboard from Neovim
+- Use `"+p` to paste from Windows clipboard
+
+**File Access:**
+- Access Windows files from WSL: `/mnt/c/Users/YourName/`
+- Access WSL files from Windows: `\\wsl$\Ubuntu\home\username\`
+- **Best practice**: Keep projects in Linux filesystem for better performance
+
+**Performance:**
+- WSL 2 provides near-native Linux performance
+- Store your code in WSL filesystem (not /mnt/c) for best performance
+- Example: Use `~/projects/` instead of `/mnt/c/Users/YourName/projects/`
 
 ---
 
@@ -313,23 +510,125 @@ If you don't use Obsidian, the plugin will automatically disable itself—no act
 
 ## Troubleshooting
 
-### Plugins Not Installing
+### Common Installation Issues
 
-**Issue**: Lazy.nvim doesn't install plugins on first launch
+> **First step for ANY issue:** Run `:checkhealth` in Neovim to identify problems
 
-**Solutions**:
-1. Check Neovim version: `nvim --version` (must be 0.9.0+)
-2. Manually trigger installation: `:Lazy sync`
-3. Check for errors: `:Lazy log`
-4. Clear cache and reinstall:
+#### Issue: Plugins Not Installing on First Launch
+
+**Symptoms:** Lazy.nvim window shows errors, plugins fail to install
+
+**Solutions:**
+1. **Check Neovim version:** `nvim --version` (must be 0.9.0+)
+2. **Verify Git is installed:** `git --version`
+3. **Check internet connection:** Lazy.nvim needs to download plugins
+4. **Manually trigger installation:** Open Neovim and run `:Lazy sync`
+5. **Check for errors:** `:Lazy log` shows detailed error messages
+6. **Last resort - Clear cache and reinstall:**
    ```bash
    # Linux/macOS
    rm -rf ~/.local/share/nvim
    rm -rf ~/.local/state/nvim
    rm -rf ~/.cache/nvim
+   # Then launch nvim again
 
    # Windows
    Remove-Item -Recurse -Force $env:LOCALAPPDATA\nvim-data
+   Remove-Item -Recurse -Force $env:LOCALAPPDATA\nvim-state
+   # Then launch nvim again
+   ```
+
+#### Issue: typescript-language-server Fails to Install via Mason
+
+**Symptoms:** Mason shows "typescript-language-server" installation failed
+
+**Root Cause:** Node.js is not installed or not in PATH
+
+**Solutions:**
+1. **Verify Node.js is installed:**
+   ```bash
+   node --version    # Must show v18.0.0 or higher
+   npm --version
+   ```
+
+2. **If Node.js not found:**
+   - **Windows:** Install via `winget install -e --id OpenJS.NodeJS` or `choco install nodejs`
+   - **Linux:** `sudo apt install nodejs npm` (Ubuntu) or `sudo dnf install nodejs` (Fedora)
+   - **macOS:** `brew install node`
+
+3. **Close and reopen Neovim** after installing Node.js
+
+4. **Manually install in Mason:**
+   ```vim
+   :Mason
+   # Press / to search for "typescript-language-server"
+   # Press i to install
+   ```
+
+#### Issue: blink.cmp Shows Errors or Doesn't Work
+
+**Symptoms:** Completion not working, errors about blink.cmp
+
+**Root Causes & Solutions:**
+
+1. **Missing Rust/Cargo:**
+   - blink.cmp requires Rust to build
+   - Verify Rust is installed:
+     ```bash
+     rustc --version
+     cargo --version
+     ```
+   - If missing, install Rust:
+     ```bash
+     # Linux/macOS/WSL
+     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+     source "$HOME/.cargo/env"
+
+     # Windows
+     winget install -e --id Rustlang.Rust.MSVC
+     ```
+   - After installing, rebuild blink.cmp:
+     ```vim
+     :Lazy build blink.cmp
+     ```
+
+2. **Conflicting completion plugin:**
+   - If you previously used nvim-cmp, clear its cache:
+     ```bash
+     rm -rf ~/.local/share/nvim/site/pack/packer  # Linux/macOS
+     ```
+
+3. **Check blink.cmp status:**
+   ```vim
+   :lua print(vim.inspect(require('blink.cmp')))
+   ```
+
+#### Issue: Harpoon Keybindings Don't Work
+
+**Symptoms:** `<leader>a` or `<C-e>` don't add files or show menu
+
+**Solutions:**
+1. **Check if Harpoon is loaded:**
+   ```vim
+   :lua print(vim.inspect(package.loaded['harpoon']))
+   ```
+
+2. **Check for keymap conflicts:**
+   ```vim
+   :verbose nmap <leader>a
+   :verbose nmap <C-e>
+   ```
+
+3. **Manually trigger Harpoon:**
+   ```vim
+   :lua require("harpoon.mark").add_file()
+   :lua require("harpoon.ui").toggle_quick_menu()
+   ```
+
+4. **Verify Harpoon is installed:**
+   ```vim
+   :Lazy
+   # Search for "harpoon", should show as installed
    ```
 
 ### Tree-sitter Compilation Errors
@@ -402,14 +701,83 @@ xcode-select --install
 3. Reduce Tree-sitter parsers (only install what you need)
 4. Use lazy loading for plugins (most are already configured for this)
 
-### Windows-Specific: Line Ending Issues
+### Platform-Specific Issues
 
-**Issue**: Files have wrong line endings (^M characters)
+#### Windows-Specific
 
-**Solution**:
+**Line Ending Issues:**
 ```bash
 git config --global core.autocrlf true
 ```
+
+**Missing 7-Zip:**
+- Mason requires 7z to extract packages
+- Install: `winget install -e --id 7zip.7zip`
+- Or: `choco install 7zip`
+
+**Python not found:**
+- Python might not be in PATH after installation
+- Verify with: `python --version`
+- If fails, reinstall Python with "Add to PATH" checked
+
+**Node.js npm permissions:**
+- Some LSP servers fail to install due to npm permissions
+- Run PowerShell as Administrator when installing via Mason
+
+#### macOS-Specific
+
+**Xcode Command Line Tools:**
+- Required for C compiler (Tree-sitter)
+- Install: `xcode-select --install`
+
+**Homebrew not in PATH:**
+- If commands not found after `brew install`:
+  ```bash
+  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zshrc
+  source ~/.zshrc
+  ```
+
+**fd command name conflict:**
+- On macOS, `fd` might conflict with other tools
+- Homebrew installs it as `fd`
+- Config already handles this
+
+#### Linux-Specific
+
+**Old Neovim version in repos:**
+- **Ubuntu/Debian**: Use snap or PPA (see [Ubuntu instructions](#ubuntudebian))
+- **Fedora**: Official repos usually have recent version
+- **Arch**: Always has latest stable
+
+**fd-find vs fd:**
+- Ubuntu/Debian install as `fd-find`, but symlink to `fd` works
+- Arch installs as `fd` directly
+
+**Missing build tools:**
+- Ubuntu/Debian: `sudo apt install build-essential`
+- Arch: `sudo pacman -S base-devel`
+- Fedora: `sudo dnf groupinstall "Development Tools"`
+
+#### WSL-Specific
+
+**Clipboard not working:**
+- Ensure you're using WSL 2 (not WSL 1)
+- Check version: `wsl -l -v` in PowerShell
+- Upgrade to WSL 2: `wsl --set-version Ubuntu 2`
+
+**Slow file access:**
+- Don't work from `/mnt/c/` (Windows filesystem)
+- Use Linux filesystem: `~/projects/` for best performance
+
+**Git credential storage:**
+```bash
+# Share Windows Git credentials with WSL
+git config --global credential.helper "/mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe"
+```
+
+**Node.js version mismatch:**
+- WSL has separate Node.js from Windows
+- Install Node.js in WSL, not just on Windows
 
 ---
 

@@ -19,7 +19,6 @@
 -- - LuaSnip (snippet engine)
 -- - nvim-cmp (completion)
 -- - Optional: glow (terminal markdown preview)
--- - Optional: markdown-preview.nvim
 --
 -- ============================================================================
 
@@ -142,7 +141,7 @@ function M.setup()
         -- UNIVERSAL FRONTMATTER SNIPPET
         -- ====================================================================
         -- Trigger: Type "yaml-universal" and press Tab
-        -- Creates comprehensive YAML frontmatter for Aethelred-Codex
+        -- Creates comprehensive YAML frontmatter for Obsidian vaults
         -- Compatible with ALL vault directories and DataViewJS queries
         --
         -- COVERS: Documents, Tasks, Projects, Operations, Research, etc.
@@ -761,13 +760,6 @@ function M.autocmds()
             end, { buffer = true, silent = true, desc = "Convert visual selection to markdown table" })
 
             -- ================================================================
-            -- PREVIEW SHORTCUTS
-            -- ================================================================
-
-            vim.keymap.set("n", "<leader>mp", ":MarkdownPreview<CR>", opts)     -- Start preview
-            vim.keymap.set("n", "<leader>ms", ":MarkdownPreviewStop<CR>", opts) -- Stop preview
-
-            -- ================================================================
             -- GLOW TERMINAL PREVIEW
             -- ================================================================
             -- If glow is installed, creates a beautiful terminal preview
@@ -863,13 +855,13 @@ After installing, restart Neovim to use :Glow command
     -- ========================================================================
     -- OBSIDIAN FRONTMATTER VALIDATOR
     -- ========================================================================
-    -- Checks if the current file has valid Aethelred-Codex frontmatter
+    -- Checks if the current file has valid Obsidian frontmatter
 
     local function validate_obsidian_frontmatter()
         local lines = vim.api.nvim_buf_get_lines(0, 0, 50, false)
         local in_frontmatter = false
 
-        -- Required fields for Aethelred-Codex
+        -- Required fields for Obsidian vault
         local has_uuid = false
         local has_id = false
         local has_title = false
@@ -916,7 +908,7 @@ After installing, restart Neovim to use :Glow command
 
         -- Display results
         if #missing == 0 and tags_format_correct then
-            vim.notify("✅ Obsidian frontmatter validation passed! Aethelred-Codex compliant.",
+            vim.notify("✅ Obsidian frontmatter validation passed! Compliant.",
                 vim.log.levels.INFO)
         else
             local message = "Obsidian Frontmatter Issues:\n\n"
@@ -932,7 +924,7 @@ After installing, restart Neovim to use :Glow command
     end
 
     vim.api.nvim_create_user_command('ObsidianValidate', validate_obsidian_frontmatter,
-        { desc = 'Validate Obsidian Aethelred-Codex frontmatter compliance' })
+        { desc = 'Validate Obsidian frontmatter compliance' })
 
     -- ========================================================================
     -- PS AUX TO TABLE COMMAND
@@ -1078,7 +1070,6 @@ return M
 --   <leader>mt/md/mu → Task checkbox (create/done/undone)
 --   <leader>mk       → Make selection a link
 --   <leader>mT       → Insert table
---   <leader>mp/ms    → Preview start/stop
 --   <leader>mg       → Glow preview (if installed)
 --
 -- COMMANDS:

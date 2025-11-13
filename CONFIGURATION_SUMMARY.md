@@ -177,7 +177,7 @@ Can edit with syntax highlighting:
 - Markdown, Git, Terminal features
 - Navigation and editing features
 
-## ⚠️ Important Notes
+## Important Notes
 
 1. **REST client is built-in** - Not a plugin, part of your config
 2. **Config is portable** - Everything in the repo works everywhere

@@ -28,15 +28,11 @@ tags
 *.new_v*
 
 # Private notes and session files
-CLAUDE_SESSION_NOTES.md
-*SESSION_NOTES*
 *.notes
 
 # Temporary test files
 /tmp/
 *.txt.backup
-
-# Claude Code directory (machine-specific, NEVER commit to public repo)
 .claude/
 
 # Personal/private directories (not for public repo)

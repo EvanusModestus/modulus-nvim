@@ -521,7 +521,7 @@ Shows plugin loading times. LSP should load in <50ms.
 
 ---
 
-**💡 Pro Tips**:
+**Pro Tips**:
 
 1. Use `:Telescope lsp_document_symbols` to search symbols in current file
 2. Use `:Telescope lsp_workspace_symbols` to search across entire project

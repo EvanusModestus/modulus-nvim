@@ -1,6 +1,6 @@
 -- ============================================================================
 -- FILE: obsidian-capture.lua
--- PURPOSE: Interactive capture system with wizards for Aethelred-Codex
+-- PURPOSE: Interactive capture system with wizards for Obsidian vaults
 -- LOCATION: ~/neovim-config/lua/evanusmodestus/modules/plugins/obsidian-capture.lua
 -- ============================================================================
 
@@ -23,23 +23,24 @@ local M = {}
 -- ============================================================================
 
 local config = {
-    vault_path = vim.fn.expand('~/Aethelred-Codex'),  -- ⚠️ CHANGE THIS to your vault path
+    vault_path = vim.fn.expand('~/obsidian-vault'),  -- ⚠️ CHANGE THIS to your vault path
     paths = {
-        codex = 'The_Codex',
-        projects = 'The_Codex/06_Projects',
-        tasks = 'The_Codex/06_Projects/06_TASKS',
-        incidents = 'The_Codex/07_Tabularium/04_INCIDENT_RESPONSE',
-        solutions = 'The_Codex/07_Tabularium/05_QUICK_SOLUTIONS',
-        ideas = 'The_Codex/07_Tabularium/03_IDEAS_INSIGHTS',
-        rca = 'The_Codex/07_Tabularium/04_INCIDENT_RESPONSE/RCA',
-        command_arsenal = 'The_Codex/_command_arsenal',
-        assets = 'The_Codex/12_Assets/06_PROJECT_ASSETS',
-        operations = 'The_Codex/05_Operations',
-        runbooks = 'The_Codex/05_Operations/RUNBOOKS',
-        change_requests = 'The_Codex/05_Operations/11_CHANGE_REQUESTS',
-        oncall_logs = 'The_Codex/05_Operations/ONCALL_LOGS',
-        learning = 'The_Codex/07_Tabularium/03_IDEAS_INSIGHTS/LEARNING',
-        network_diagrams = 'The_Codex/04_Foundry/NETWORK_DIAGRAMS',
+        -- ⚠️ CUSTOMIZE THESE: Update paths to match your vault's folder structure
+        -- Example structure shown below - modify to fit your organization
+        projects = 'Projects',
+        tasks = 'Projects/Tasks',
+        incidents = 'Operations/Incidents',
+        solutions = 'Knowledge/Solutions',
+        ideas = 'Knowledge/Ideas',
+        rca = 'Operations/Incidents/RCA',
+        command_arsenal = 'Commands',
+        assets = 'Assets',
+        operations = 'Operations',
+        runbooks = 'Operations/Runbooks',
+        change_requests = 'Operations/Change_Requests',
+        oncall_logs = 'Operations/OnCall_Logs',
+        learning = 'Knowledge/Learning',
+        network_diagrams = 'Diagrams/Network',
     },
     notifications = {
         enabled = true,
