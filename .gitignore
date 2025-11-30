@@ -23,6 +23,7 @@ tags
 
 # Backup files
 *.bak
+*.*bak
 *.orig_bak
 *.backup
 *.new_v*
