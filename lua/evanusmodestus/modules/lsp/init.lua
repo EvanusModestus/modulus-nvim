@@ -328,8 +328,8 @@ function M.setup()
             'powershell_es',
 
             -- Infrastructure & DevOps
-            'nginx_language_server',
             'terraformls',
+            -- 'nginx_language_server', -- install via: uv tool install --python 3.12 nginx-language-server
         },
         handlers = {
             -- Default handler for all servers except lua_ls

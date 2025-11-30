@@ -3,6 +3,10 @@
 
 local M = {}
 
+function M.setup()
+    -- Harpoon setup (uses defaults, customize here if needed)
+end
+
 function M.keymaps()
     local status_ok_mark, mark = pcall(require, "harpoon.mark")
     local status_ok_ui, ui = pcall(require, "harpoon.ui")
