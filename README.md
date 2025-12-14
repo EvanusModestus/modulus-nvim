@@ -74,9 +74,10 @@ sudo apt update && sudo apt install -y \
   neovim git build-essential ripgrep fd-find nodejs npm \
   curl wget unzip tar gzip python3 python3-pip
 
-# Install Rust
+# Install Rust via rustup (nightly required for blink.cmp SIMD)
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source "$HOME/.cargo/env"
+rustup install nightly
 ```
 
 **Arch Linux:**
@@ -96,14 +97,20 @@ sudo dnf install -y \
   neovim git gcc make ripgrep fd-find nodejs npm \
   curl wget unzip tar gzip python3 python3-pip
 
-# Install Rust
+# Install Rust via rustup (nightly required for blink.cmp SIMD)
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source "$HOME/.cargo/env"
+rustup install nightly
 ```
 
 **macOS (Homebrew):**
 ```bash
-brew install neovim git ripgrep fd node curl wget python3 rust
+brew install neovim git ripgrep fd node curl wget python3 rustup-init
+
+# Initialize rustup and install nightly (required for blink.cmp SIMD)
+rustup-init -y
+source "$HOME/.cargo/env"
+rustup install nightly
 ```
 
 **Install Nerd Font:**
@@ -175,11 +182,14 @@ winget install -e --id BurntSushi.ripgrep.MSVC
 winget install -e --id sharkdp.fd
 winget install -e --id OpenJS.NodeJS
 winget install -e --id Python.Python.3.12
-winget install -e --id Rustlang.Rust.MSVC
+winget install -e --id Rustlang.Rustup
 winget install -e --id Microsoft.VisualStudio.2022.BuildTools
 winget install -e --id 7zip.7zip
 
 # After Visual Studio Build Tools installs, select "Desktop development with C++" workload
+
+# Install Rust nightly (required for blink.cmp SIMD)
+rustup install nightly
 ```
 
 **Install Nerd Font:**
@@ -211,7 +221,10 @@ Set-ExecutionPolicy Bypass -Scope Process -Force
 iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 
 # Install all dependencies
-choco install -y neovim git ripgrep fd nodejs python rust curl wget unzip 7zip visualstudio2022buildtools
+choco install -y neovim git ripgrep fd nodejs python rustup curl wget unzip 7zip visualstudio2022buildtools
+
+# Install Rust nightly (required for blink.cmp SIMD)
+rustup install nightly
 ```
 
 **Install Nerd Font:**
