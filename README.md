@@ -83,9 +83,11 @@ source "$HOME/.cargo/env"
 ```bash
 sudo pacman -Syu --needed \
   neovim git base-devel ripgrep fd nodejs npm \
-  curl wget unzip tar gzip python python-pip rust
+  curl wget unzip tar gzip python python-pip rustup
 
-# Cargo is included with rust package on Arch
+# Set up Rust toolchains (nightly required for blink.cmp SIMD)
+rustup default stable
+rustup install nightly
 ```
 
 **Fedora/RHEL:**
