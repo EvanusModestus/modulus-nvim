@@ -95,7 +95,7 @@ sudo pacman -S --needed git base-devel
 git clone https://aur.archlinux.org/yay.git /tmp/yay && cd /tmp/yay && makepkg -si
 
 # Install win32yank for clipboard support (required for WSL/Windows clipboard integration)
-yay -S win32yank
+yay -S win32yank-bin
 ```
 
 **Fedora/RHEL:**
