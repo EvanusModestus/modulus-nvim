@@ -89,6 +89,13 @@ sudo pacman -Syu --needed \
 # Set up Rust toolchains (nightly required for blink.cmp SIMD)
 rustup default stable
 rustup install nightly
+
+# Install yay (AUR helper) if not already installed
+sudo pacman -S --needed git base-devel
+git clone https://aur.archlinux.org/yay.git /tmp/yay && cd /tmp/yay && makepkg -si
+
+# Install win32yank for clipboard support (required for WSL/Windows clipboard integration)
+yay -S win32yank
 ```
 
 **Fedora/RHEL:**
