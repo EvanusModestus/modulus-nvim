@@ -17,6 +17,18 @@
 |-----|---------|---------|
 | `<leader>pb` | Project Buffers | plugin-keymaps.lua |
 | `<leader>po` | Recent Files (oldfiles) | plugin-keymaps.lua |
+| `<C-h>` | Navigate left window | keymaps.lua |
+| `<C-j>` | Navigate down window | keymaps.lua |
+| `<C-k>` | Navigate up window | keymaps.lua |
+| `<C-l>` | Navigate right window | keymaps.lua |
+
+### Quickfix & Location List
+| Key | Action | Source |
+|-----|---------|---------|
+| `]q` | Next quickfix item | keymaps.lua |
+| `[q` | Previous quickfix item | keymaps.lua |
+| `]l` | Next location list item | keymaps.lua |
+| `[l` | Previous location list item | keymaps.lua |
 
 ### Search & Help
 | Key | Action | Source |
@@ -36,12 +48,12 @@
 ## 🎯 **Harpoon (Quick File Navigation)**
 | Key | Action | Source |
 |-----|---------|---------|
-| `<leader>a` | Add to Harpoon | plugin-keymaps.lua |
-| `<C-e>` | Harpoon Menu | plugin-keymaps.lua |
-| `<C-h>` | Harpoon File 1 | plugin-keymaps.lua |
-| `<C-t>` | Harpoon File 2 | plugin-keymaps.lua |
-| `<C-n>` | Harpoon File 3 | plugin-keymaps.lua |
-| `<C-s>` | Harpoon File 4 | plugin-keymaps.lua |
+| `<leader>a` | Add to Harpoon | harpoon.lua |
+| `<C-e>` | Harpoon Menu | harpoon.lua |
+| `<leader>1` | Harpoon File 1 | harpoon.lua |
+| `<leader>2` | Harpoon File 2 | harpoon.lua |
+| `<leader>3` | Harpoon File 3 | harpoon.lua |
+| `<leader>4` | Harpoon File 4 | harpoon.lua |
 
 ## 📝 **Git Operations**
 | Key | Action | Source |
@@ -94,13 +106,16 @@
 ### Debugging (DAP)
 | Key | Action | Source |
 |-----|---------|---------|
-| `<F5>` | Debug Continue | plugin-keymaps.lua |
-| `<F10>` | Step Over | plugin-keymaps.lua |
-| `<F11>` | Step Into | plugin-keymaps.lua |
-| `<F12>` | Step Out | plugin-keymaps.lua |
-| `<leader>b` | Toggle Breakpoint | plugin-keymaps.lua |
-| `<leader>B` | Conditional Breakpoint | plugin-keymaps.lua |
-| `<leader>du` | Toggle Debug UI | plugin-keymaps.lua |
+| `<F5>` | Debug Continue | dap.lua |
+| `<F10>` | Step Over | dap.lua |
+| `<F11>` | Step Into | dap.lua |
+| `<F12>` | Step Out | dap.lua |
+| `<leader>b` | Toggle Breakpoint | dap.lua |
+| `<leader>B` | Conditional Breakpoint | dap.lua |
+| `<leader>lp` | Log Point | dap.lua |
+| `<leader>dr` | Debug REPL | dap.lua |
+| `<leader>dl` | Debug Last | dap.lua |
+| `<leader>du` | Toggle Debug UI | dap.lua |
 
 ### Refactoring
 | Key | Action | Mode | Source |
@@ -115,6 +130,14 @@
 |-----|---------|---------|
 | `<leader>cr` | Compile & Run | compile-keymaps.lua |
 | `<leader>cc` | Compile Only | compile-keymaps.lua |
+| `<F6>` | Compile & Run C | toggleterm.lua |
+| `<F7>` | Compile & Run C++ | toggleterm.lua |
+
+### Snippets (LuaSnip)
+| Key | Action | Mode | Source |
+|-----|---------|------|---------|
+| `<C-j>` | Jump to next placeholder | Insert/Select | plugin-keymaps.lua |
+| `<C-k>` | Jump to previous placeholder | Insert/Select | plugin-keymaps.lua |
 
 ## 🧘 **Productivity & Focus**
 | Key | Action | Source |

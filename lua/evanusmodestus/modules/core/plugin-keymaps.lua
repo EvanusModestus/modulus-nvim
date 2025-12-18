@@ -17,17 +17,8 @@ function M.setup()
         vim.keymap.set('n', '<leader>?', telescope_builtin.current_buffer_fuzzy_find, { desc = "Buffer search" })
     end
 
-    -- Harpoon
-    local harpoon_mark_ok, mark = pcall(require, "harpoon.mark")
-    local harpoon_ui_ok, ui = pcall(require, "harpoon.ui")
-    if harpoon_mark_ok and harpoon_ui_ok then
-        vim.keymap.set("n", "<leader>a", mark.add_file, { desc = "Add to harpoon" })
-        vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu, { desc = "Harpoon menu" })
-        vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end, { desc = "Harpoon file 1" })
-        vim.keymap.set("n", "<C-t>", function() ui.nav_file(2) end, { desc = "Harpoon file 2" })
-        vim.keymap.set("n", "<C-n>", function() ui.nav_file(3) end, { desc = "Harpoon file 3" })
-        vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end, { desc = "Harpoon file 4" })
-    end
+    -- Harpoon keymaps are defined in lua/evanusmodestus/modules/plugins/harpoon.lua
+    -- Using <leader>1-4 for file slots to avoid conflict with <C-h/j/k/l> window navigation
 
     -- Fugitive
     -- Removed: <leader>gs - using telescope git_status instead (works from oil buffers)
@@ -50,29 +41,9 @@ function M.setup()
         vim.keymap.set("n", "<leader>rbf", ":Refactor extract_block_to_file")
     end
 
-    -- DAP (Debugging)
-    local dap_ok, dap = pcall(require, 'dap')
-    if dap_ok then
-        vim.keymap.set('n', '<F5>', dap.continue, { desc = "Debug: Continue" })
-        vim.keymap.set('n', '<F10>', dap.step_over, { desc = "Debug: Step Over" })
-        vim.keymap.set('n', '<F11>', dap.step_into, { desc = "Debug: Step Into" })
-        vim.keymap.set('n', '<F12>', dap.step_out, { desc = "Debug: Step Out" })
-        vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
-        vim.keymap.set('n', '<leader>B', function()
-            dap.set_breakpoint(vim.fn.input('Breakpoint condition: '))
-        end, { desc = "Conditional Breakpoint" })
-        vim.keymap.set('n', '<leader>lp', function()
-            dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
-        end, { desc = "Log Point" })
-        vim.keymap.set('n', '<leader>dr', dap.repl.open, { desc = "Debug REPL" })
-        vim.keymap.set('n', '<leader>dl', dap.run_last, { desc = "Debug Last" })
-    end
-
-    -- DAP UI
-    local dapui_ok, dapui = pcall(require, 'dapui')
-    if dapui_ok then
-        vim.keymap.set('n', '<leader>du', dapui.toggle, { desc = "Toggle Debug UI" })
-    end
+    -- DAP keymaps are defined in lua/evanusmodestus/modules/plugins/dap.lua
+    -- F5=continue, F10=step over, F11=step into, F12=step out
+    -- <leader>b=breakpoint, <leader>B=conditional breakpoint
 
     -- Zen Mode
     vim.keymap.set("n", "<leader>zz", function()
